@@ -99,11 +99,12 @@ def main(start_date_str, end_date_str):
                     df = execute_sql_query(engine, sql_query)
                     
                     if df is not None:
-                        # Define the file name with appropriate hierarchy
-                        file_name = f"{current_date.strftime('%Y')}/{current_date.strftime('%m')}/{current_date.strftime('%d')}/{table_schema_str}/{table_name_str}/{table_name_str}_{current_date.strftime('%Y_%m_%d')}.parquet"
                         
+                        # Define the file name with appropriate hierarchy
+                        file_name = f"{current_date.strftime('%Y')}/{current_date.strftime('%m')}/{current_date.strftime('%d')}/{table_schema_str}_{table_name_str}/{table_name_str}_{current_date.strftime('%Y_%m_%d')}.parquet"
+
                         # Create directories if they do not exist
-                        os.makedirs(os.path.join(temp_dir, current_date.strftime('%Y'), current_date.strftime('%m'), current_date.strftime('%d'),table_schema_str,table_name_str), exist_ok=True)
+                        os.makedirs(os.path.join(temp_dir, current_date.strftime('%Y'), current_date.strftime('%m'), current_date.strftime('%d'), f"{table_schema_str}_{table_name_str}"), exist_ok=True)
 
                         # Write DataFrame to Parquet file
                         parquet_filename = os.path.join(temp_dir, file_name)
